@@ -22,7 +22,7 @@ checkPassword = async (username, plaintextPassword) => {
     // (this is a quick way to check if an object contains a key)
     if (globalStore[username]) {
         // Use bcrypt's compare methof to compare a plaintext password to a password hash
-        let result = bcrypt.compare(plaintextPassword, globalStore[username])
+        let result = bcrypt.compareSync(plaintextPassword, globalStore[username])
 
         if (result) {
             // Display message for valid credentials
@@ -41,7 +41,7 @@ checkPassword = async (username, plaintextPassword) => {
 
 hashPassword = async (username, password) => {
     // Make the password hash using bcrypt
-    let passwordHash = bcrypt.hash(password, 12)
+    let passwordHash = bcrypt.hashSync(password, 12)
 
     // Add the user and password hash to the global store object
     globalStore[username] = passwordHash
