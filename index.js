@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt')
 // This allows us to read from the terminal
 const readlineSync = require('readline-sync')
 
+// This allows us to save the datastore to a file
+const jsonfile = require('jsonfile')
+
 // We'll keep a global object to store usernames and password hashes
 let globalStore = {}
 
@@ -72,6 +75,13 @@ createUser = async () => {
     }
 }
 
+loadStore = () => {
+    // Load the global store object from a file
+    console.log(`\nLoading the store from a file...\n`)
+    globalStore = jsonfile.readFileSync('store.json')
+    console.log(`\nStore loaded!\n`)
+}
+
 loginUser = async () => {
     // Greet the user
     console.log(`\nGreat, let's log you in.\n`)
@@ -102,6 +112,13 @@ viewStore = () => {
     console.log('\n==================================\n')
 }
 
+saveStore = () => {
+    // Save the global store object to a file
+    console.log(`\nSaving the store to a file...\n`)
+    jsonfile.writeFileSync('store.json', globalStore)
+    console.log(`\nStore saved!\n`)
+}
+
 // Program loop
 programLoop = async () => {
     while (true) {
@@ -113,8 +130,14 @@ programLoop = async () => {
             case 'create':
                 await createUser()
                 break
+            case 'load':
+                await loadStore()
+                break
             case 'login':
                 await loginUser()
+                break
+            case 'save':
+                await saveStore()
                 break
             case 'help':
                 console.log('\nYou can choose from the following actions:\n')
