@@ -144,6 +144,8 @@ programLoop = async () => {
                 console.log('\tview: see all users')
                 console.log('\tcreate: add a new user')
                 console.log('\tlogin: login to a specific user')
+                console.log('\tload: load the store from a file')
+                console.log('\tsave: save the store to a file')
                 console.log('\thelp: show available commands')
                 console.log('\texit: quit this program\n\n')
                 break
